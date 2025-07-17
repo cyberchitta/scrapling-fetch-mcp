@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/cyberchitta-scrapling-fetch-mcp-badge.jpg)](https://mseep.ai/app/cyberchitta-scrapling-fetch-mcp)
+
 # Scrapling Fetch MCP
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
