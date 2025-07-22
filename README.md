@@ -5,6 +5,10 @@
 
 An MCP server that helps AI assistants access text content from websites that implement bot detection, bridging the gap between what you can see in your browser and what the AI can access.
 
+<a href="https://glama.ai/mcp/servers/@cyberchitta/scrapling-fetch-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@cyberchitta/scrapling-fetch-mcp/badge" alt="Scrapling Fetch MCP server" />
+</a>
+
 ## Intended Use
 
 This tool is optimized for low-volume retrieval of documentation and reference materials (text/HTML only) from websites that implement bot detection. It has not been designed or tested for general-purpose site scraping or data harvesting.
