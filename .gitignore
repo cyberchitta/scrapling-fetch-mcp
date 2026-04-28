@@ -38,5 +38,6 @@ Thumbs.db
 # Virtual environment
 .venv
 .env
+.commit-msg
 
 .DS_Store
