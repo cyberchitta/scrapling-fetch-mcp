@@ -1,7 +1,0 @@
-{
-  "name": "scrapling-fetch-mcp",
-  "description": "Stealth web fetching for bot-protected sites. Provides s_fetch_page and s_fetch_pattern MCP tools plus /s-fetch slash command.",
-  "author": {
-    "name": "cyberchitta"
-  }
-}

@@ -89,14 +89,14 @@ Claude automatically starts with `basic` mode and escalates if needed.
 - May not work with sites requiring authentication
 - Performance varies by site complexity and protection level
 
-## Claude Code Plugin
+## Claude Code Skill
 
-This repo also ships as a Claude Code plugin with a `/s-fetch` slash command that fetches URLs directly via scrapling — no MCP server configuration needed.
+This repo also ships as a Claude Code skill with a `/s-fetch` slash command that fetches URLs directly via scrapling — no MCP server configuration needed.
 
 Install from within Claude Code:
 
 ```
-/plugins install github:cyberchitta/scrapling-fetch-mcp
+/skills install github:cyberchitta/scrapling-fetch-mcp
 ```
 
 Then use `/s-fetch <url>` to fetch any URL with bot-detection bypass. The command accepts an optional mode (`basic`, `stealth`, `max-stealth`) and format (`markdown`, `html`).
