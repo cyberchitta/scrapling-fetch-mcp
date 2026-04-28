@@ -16,7 +16,7 @@ dependencies = [
     "beautifulsoup4>=4.14.2",
     "lxml>=6.0.2",
     "markdownify>=1.2.0",
-    "mcp>=1.15.0",
+    "mcp>=1.23.0",
     "scrapling[fetchers]>=0.4.7",
 ]
 
