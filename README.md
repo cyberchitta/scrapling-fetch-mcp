@@ -3,36 +3,56 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![PyPI version](https://img.shields.io/pypi/v/scrapling-fetch-mcp.svg)](https://pypi.org/project/scrapling-fetch-mcp/)
 
-An MCP server and Claude Code skill that help AI assistants access text content from websites that implement bot detection, bridging the gap between what you can see in your browser and what the AI can access.
+Helps AI assistants fetch content from bot-protected websites. Uses Scrapling (patchright + curl-cffi) to bypass anti-automation measures, returning clean HTML or Markdown.
 
-## Intended Use
+> Optimized for low-volume retrieval of documentation and reference materials. Not designed for high-volume scraping or data harvesting.
 
-This tool is optimized for low-volume retrieval of documentation and reference materials (text/HTML only) from websites that implement bot detection. It has not been designed or tested for general-purpose site scraping or data harvesting.
+**Requirements**: Python 3.10+, [uv](https://github.com/astral-sh/uv)
 
-> **Note**: This project was developed in collaboration with Claude Sonnets 3.7 and 4.5, using [LLM Context](https://github.com/cyberchitta/llm-context.py).
+## Claude Code Skill
 
-## Installation
+The easiest way to use this is as a Claude Code skill. Once installed, Claude will automatically fetch bot-protected URLs when you ask — no manual commands needed.
 
-### Requirements
-
-- Python 3.10+
-- [uv](https://github.com/astral-sh/uv) package manager
-
-### Install
+**Install into your project** (recommended — only loads in this project's context):
 
 ```bash
-# Install scrapling-fetch-mcp
-uv tool install git+https://github.com/cyberchitta/scrapling-fetch-mcp
+git clone --depth=1 https://github.com/cyberchitta/scrapling-fetch-mcp /tmp/scrapling-fetch-mcp
+cp -r /tmp/scrapling-fetch-mcp/skills/s-fetch .claude/skills/
+cp -r /tmp/scrapling-fetch-mcp/skills/s-fetch-setup .claude/skills/
+rm -rf /tmp/scrapling-fetch-mcp
+```
 
-# Install browser binaries (REQUIRED - large downloads)
+**Or install for all projects** (loads into context everywhere):
+
+```bash
+git clone --depth=1 https://github.com/cyberchitta/scrapling-fetch-mcp /tmp/scrapling-fetch-mcp
+cp -r /tmp/scrapling-fetch-mcp/skills/s-fetch ~/.claude/skills/
+cp -r /tmp/scrapling-fetch-mcp/skills/s-fetch-setup ~/.claude/skills/
+rm -rf /tmp/scrapling-fetch-mcp
+```
+
+Then ask Claude to run `/s-fetch-setup` — it will install the tool and browser binaries (large download), then remove itself. After that, just ask naturally:
+
+```
+"Fetch the docs at https://example.com/api"
+"Find all mentions of 'authentication' on that page"
+"Get me the installation instructions from their homepage"
+```
+
+## Claude Desktop (MCP Server)
+
+If you've already run `/s-fetch-setup`, the tool is installed — skip to the config below.
+
+Otherwise install first:
+
+```bash
+uv tool install git+https://github.com/cyberchitta/scrapling-fetch-mcp
 uvx --from git+https://github.com/cyberchitta/scrapling-fetch-mcp scrapling install
 ```
 
-**Important**: The browser installation downloads hundreds of MB of data and must complete before first use. If the MCP server times out on first use, the browsers may still be installing in the background. Wait a few minutes and try again.
+> **Note**: Browser installation downloads hundreds of MB and must complete before first use. If the server times out initially, wait a few minutes and try again.
 
-## Setup with Claude Desktop
-
-Add this configuration to your Claude Desktop MCP settings:
+Add this to your Claude Desktop MCP settings and restart:
 
 **MacOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`  
 **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
@@ -48,61 +68,24 @@ Add this configuration to your Claude Desktop MCP settings:
 }
 ```
 
-After updating the config, restart Claude Desktop.
+## How It Works
 
-## What It Does
+Two tools, used automatically by Claude:
 
-This MCP server provides two tools that Claude can use automatically when you ask it to fetch web content:
+- **Page fetching** — retrieves complete pages with pagination support
+- **Pattern extraction** — finds content matching a regex
 
-- **Page fetching**: Retrieves complete web pages with support for pagination
-- **Pattern extraction**: Finds and extracts specific content using regex patterns
+Three protection levels, escalated automatically:
 
-The AI decides which tool to use based on your request. You just ask naturally:
-
-```
-"Can you fetch the docs at https://example.com/api"
-"Find all mentions of 'authentication' on that page"
-"Get me the installation instructions from their homepage"
-```
-
-## Protection Modes
-
-The tools support three levels of bot detection bypass:
-
-- **basic**: Fast (1-2s), works for most sites
-- **stealth**: Moderate (3-8s), handles more protection
-- **max-stealth**: Maximum (10+s), for heavily protected sites
-
-Claude automatically starts with `basic` mode and escalates if needed.
-
-## Tips for Best Results
-
-- Just ask naturally - Claude handles the technical details
-- For large pages, Claude can page through content automatically
-- For specific searches, mention what you're looking for and Claude will use pattern matching
-- The metadata returned helps Claude decide whether to page or search
+- **basic** — fast (1-2s), works for most sites
+- **stealth** — moderate (3-8s), headless Chromium
+- **max-stealth** — thorough (10s+), full browser fingerprint
 
 ## Limitations
 
-- Designed for text content only (documentation, articles, references)
-- Not for high-volume scraping or data harvesting
-- May not work with sites requiring authentication
+- Text content only (documentation, articles, references)
+- Not for high-volume scraping or sites requiring authentication
 - Performance varies by site complexity and protection level
-
-## Claude Code Skill
-
-This repo also ships as a Claude Code skill with a `/s-fetch` slash command that fetches URLs directly via scrapling.
-
-Install the skills by running these commands in your terminal:
-
-```bash
-git clone --depth=1 https://github.com/cyberchitta/scrapling-fetch-mcp /tmp/scrapling-fetch-mcp
-cp -r /tmp/scrapling-fetch-mcp/skills/s-fetch ~/.claude/skills/
-cp -r /tmp/scrapling-fetch-mcp/skills/s-fetch-setup ~/.claude/skills/
-rm -rf /tmp/scrapling-fetch-mcp
-```
-
-Then ask Claude to run `/s-fetch-setup` — it will install the tool and browser binaries, then remove itself. After that, Claude will invoke `/s-fetch` automatically when you ask it to fetch a URL from a bot-protected site. You can also invoke it directly as `/s-fetch <url>` with an optional mode (`basic`, `stealth`, `max-stealth`) and format (`markdown`, `html`).
 
 ## License
 
