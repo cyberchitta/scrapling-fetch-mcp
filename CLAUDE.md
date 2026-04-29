@@ -33,7 +33,7 @@ skills/s-fetch/SKILL.md        # /s-fetch — fetches URLs via scrapling
 skills/s-fetch-setup/SKILL.md  # /s-fetch-setup — installs the tool and browser binaries, then deletes itself
 ```
 
-Install: `/skills install github:cyberchitta/scrapling-fetch-mcp`
+Install: clone the repo and copy `skills/s-fetch` and `skills/s-fetch-setup` into `~/.claude/skills/` (see README for commands).
 
 Run `/s-fetch-setup` once after install. It installs the MCP server tool and browser binaries, then removes itself so it no longer occupies context. `/s-fetch` uses `$(uv tool dir)/scrapling-fetch-mcp/bin/python3 -` and requires this setup to have been done.
 
