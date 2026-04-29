@@ -91,7 +91,7 @@ Claude automatically starts with `basic` mode and escalates if needed.
 
 ## Claude Code Skill
 
-This repo also ships as a Claude Code skill with a `/s-fetch` slash command that fetches URLs directly via scrapling. The skill requires the MCP server to be installed first (it reuses the same scrapling environment).
+This repo also ships as a Claude Code skill with a `/s-fetch` slash command that fetches URLs directly via scrapling.
 
 Install from within Claude Code:
 
@@ -99,7 +99,7 @@ Install from within Claude Code:
 /skills install github:cyberchitta/scrapling-fetch-mcp
 ```
 
-Once installed, Claude will use `/s-fetch` automatically when you ask it to fetch a URL from a bot-protected site. You can also invoke it directly as `/s-fetch <url>` with an optional mode (`basic`, `stealth`, `max-stealth`) and format (`markdown`, `html`).
+Then ask Claude to run `/s-fetch-setup` — it will install the tool and browser binaries, then remove itself. After that, Claude will invoke `/s-fetch` automatically when you ask it to fetch a URL from a bot-protected site. You can also invoke it directly as `/s-fetch <url>` with an optional mode (`basic`, `stealth`, `max-stealth`) and format (`markdown`, `html`).
 
 ## License
 

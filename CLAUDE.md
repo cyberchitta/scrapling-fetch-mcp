@@ -29,12 +29,13 @@ No test suite exists in this project.
 ## Skill structure
 
 ```
-skills/s-fetch/SKILL.md      # /s-fetch slash command — invokes scrapling directly via Bash
+skills/s-fetch/SKILL.md        # /s-fetch — fetches URLs via scrapling
+skills/s-fetch-setup/SKILL.md  # /s-fetch-setup — installs the tool and browser binaries, then deletes itself
 ```
 
 Install: `/skills install github:cyberchitta/scrapling-fetch-mcp`
 
-The skill uses `$(uv tool dir)/scrapling-fetch-mcp/bin/python3 -` and requires the MCP server to be installed first (scrapling and browser binaries are part of that install).
+Run `/s-fetch-setup` once after install. It installs the MCP server tool and browser binaries, then removes itself so it no longer occupies context. `/s-fetch` uses `$(uv tool dir)/scrapling-fetch-mcp/bin/python3 -` and requires this setup to have been done.
 
 ## Architecture
 
