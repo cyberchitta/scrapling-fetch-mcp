@@ -23,7 +23,7 @@ $ARGUMENTS — parse as `<url> [mode] [format]`
 Run the following Bash command, substituting URL, MODE, and FORMAT with the parsed values:
 
 ```bash
-uvx --from scrapling-fetch-mcp python3 - <<'PYEOF'
+"$(uv tool dir)/scrapling-fetch-mcp/bin/python3" - <<'PYEOF'
 import asyncio
 from contextlib import redirect_stdout
 from os import devnull

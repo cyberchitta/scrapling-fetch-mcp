@@ -34,7 +34,7 @@ skills/s-fetch/SKILL.md      # /s-fetch slash command — invokes scrapling dire
 
 Install: `/skills install github:cyberchitta/scrapling-fetch-mcp`
 
-The skill uses `uvx --from scrapling-fetch-mcp python3 -` and requires the MCP server to be installed first (scrapling and browser binaries are part of that install).
+The skill uses `$(uv tool dir)/scrapling-fetch-mcp/bin/python3 -` and requires the MCP server to be installed first (scrapling and browser binaries are part of that install).
 
 ## Architecture
 
