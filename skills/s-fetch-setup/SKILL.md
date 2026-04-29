@@ -27,7 +27,7 @@ uv tool install git+https://github.com/cyberchitta/scrapling-fetch-mcp
 **3. Remove this setup skill** (no longer needed):
 
 ```bash
-rm -rf ~/.claude/skills/s-fetch-setup
+rm -rf ~/.claude/skills/s-fetch-setup .claude/skills/s-fetch-setup
 ```
 
 Report success and tell the user that s-fetch is ready to use.
