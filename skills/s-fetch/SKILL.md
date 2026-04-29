@@ -8,7 +8,7 @@ version: 1.0.0
 
 # s-fetch
 
-Fetches a URL directly via scrapling, bypassing bot detection. Does not use the MCP server — runs scrapling inline.
+Fetches a URL directly via scrapling, bypassing bot detection. Requires `scrapling-fetch-mcp` to be installed (`uv tool install git+https://github.com/cyberchitta/scrapling-fetch-mcp` + `uvx --from scrapling-fetch-mcp scrapling install`).
 
 ## Arguments
 
@@ -23,12 +23,7 @@ $ARGUMENTS — parse as `<url> [mode] [format]`
 Run the following Bash command, substituting URL, MODE, and FORMAT with the parsed values:
 
 ```bash
-uv run --isolated \
-  --with 'scrapling[fetchers]>=0.4.7' \
-  --with 'markdownify>=1.2.0' \
-  --with 'beautifulsoup4>=4.14.2' \
-  --with 'lxml>=6.0.2' \
-  python3 - <<'PYEOF'
+uvx --from scrapling-fetch-mcp python3 - <<'PYEOF'
 import asyncio
 from contextlib import redirect_stdout
 from os import devnull
