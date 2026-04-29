@@ -99,7 +99,7 @@ Install from within Claude Code:
 /skills install github:cyberchitta/scrapling-fetch-mcp
 ```
 
-Then use `/s-fetch <url>` to fetch any URL with bot-detection bypass. The command accepts an optional mode (`basic`, `stealth`, `max-stealth`) and format (`markdown`, `html`).
+Once installed, Claude will use `/s-fetch` automatically when you ask it to fetch a URL from a bot-protected site. You can also invoke it directly as `/s-fetch <url>` with an optional mode (`basic`, `stealth`, `max-stealth`) and format (`markdown`, `html`).
 
 ## License
 
