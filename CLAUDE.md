@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 scrapling-fetch-mcp is an MCP server that helps AI assistants fetch web content from bot-protected sites. It exposes two tools (`s_fetch_page`, `s_fetch_pattern`) via FastMCP over stdio, using Scrapling (patchright + playwright + curl-cffi) to bypass anti-automation measures and returning HTML or Markdown.
 
-It also ships as a Claude Code skill with a `/s-fetch` slash command that invokes scrapling directly via Bash (no MCP server required), installable from this repo.
+It also ships as a Claude Code skill with a `/s-fetch` slash command that invokes scrapling directly via Bash. The skill requires the MCP server to be installed first.
 
 ## Commands
 

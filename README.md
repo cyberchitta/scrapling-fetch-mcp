@@ -22,10 +22,10 @@ This tool is optimized for low-volume retrieval of documentation and reference m
 
 ```bash
 # Install scrapling-fetch-mcp
-uv tool install scrapling-fetch-mcp
+uv tool install git+https://github.com/cyberchitta/scrapling-fetch-mcp
 
 # Install browser binaries (REQUIRED - large downloads)
-uvx --from scrapling-fetch-mcp scrapling install
+uvx --from git+https://github.com/cyberchitta/scrapling-fetch-mcp scrapling install
 ```
 
 **Important**: The browser installation downloads hundreds of MB of data and must complete before first use. If the MCP server times out on first use, the browsers may still be installing in the background. Wait a few minutes and try again.
@@ -91,7 +91,7 @@ Claude automatically starts with `basic` mode and escalates if needed.
 
 ## Claude Code Skill
 
-This repo also ships as a Claude Code skill with a `/s-fetch` slash command that fetches URLs directly via scrapling — no MCP server configuration needed.
+This repo also ships as a Claude Code skill with a `/s-fetch` slash command that fetches URLs directly via scrapling. The skill requires the MCP server to be installed first (it reuses the same scrapling environment).
 
 Install from within Claude Code:
 
