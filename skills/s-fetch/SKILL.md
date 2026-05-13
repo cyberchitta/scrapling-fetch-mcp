@@ -8,7 +8,13 @@ version: 1.0.0
 
 # s-fetch
 
-Fetches a URL directly via scrapling, bypassing bot detection. Requires `scrapling-fetch-mcp` to be installed (`uv tool install git+https://github.com/cyberchitta/scrapling-fetch-mcp` + `uvx --from scrapling-fetch-mcp scrapling install`).
+Fetches a URL directly via scrapling, bypassing bot detection.
+
+## Setup
+
+If the bash command below fails because `scrapling-fetch-mcp` isn't
+installed (e.g. `No such file or directory` for the `bin/python3`
+path), follow `references/install.md` once before proceeding.
 
 ## Arguments
 

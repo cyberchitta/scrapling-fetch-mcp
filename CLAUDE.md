@@ -29,13 +29,13 @@ No test suite exists in this project.
 ## Skill structure
 
 ```
-skills/s-fetch/SKILL.md        # /s-fetch — fetches URLs via scrapling
-skills/s-fetch-setup/SKILL.md  # /s-fetch-setup — installs the tool and browser binaries, then deletes itself
+skills/s-fetch/SKILL.md              # /s-fetch — fetches URLs via scrapling
+skills/s-fetch/references/install.md # one-time install steps, loaded only on miss
 ```
 
-Install: clone the repo and copy `skills/s-fetch` and `skills/s-fetch-setup` into `~/.claude/skills/` (see README for commands).
+Install: clone the repo and copy `skills/s-fetch` into `~/.claude/skills/` (see README for commands).
 
-Run `/s-fetch-setup` once after install. It installs the MCP server tool and browser binaries, then removes itself so it no longer occupies context. `/s-fetch` uses `$(uv tool dir)/scrapling-fetch-mcp/bin/python3 -` and requires this setup to have been done.
+`/s-fetch` uses `$(uv tool dir)/scrapling-fetch-mcp/bin/python3 -`. The first time it runs on a machine without the tool, SKILL.md's Setup section directs Claude to `references/install.md`, which is read on demand so it doesn't sit in context once the tool is present.
 
 ## Architecture
 

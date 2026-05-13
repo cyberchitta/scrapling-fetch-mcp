@@ -18,7 +18,6 @@ The easiest way to use this is as a Claude Code skill. Once installed, Claude wi
 ```bash
 git clone --depth=1 https://github.com/cyberchitta/scrapling-fetch-mcp /tmp/scrapling-fetch-mcp
 cp -r /tmp/scrapling-fetch-mcp/skills/s-fetch .claude/skills/
-cp -r /tmp/scrapling-fetch-mcp/skills/s-fetch-setup .claude/skills/
 rm -rf /tmp/scrapling-fetch-mcp
 ```
 
@@ -27,11 +26,13 @@ rm -rf /tmp/scrapling-fetch-mcp
 ```bash
 git clone --depth=1 https://github.com/cyberchitta/scrapling-fetch-mcp /tmp/scrapling-fetch-mcp
 cp -r /tmp/scrapling-fetch-mcp/skills/s-fetch ~/.claude/skills/
-cp -r /tmp/scrapling-fetch-mcp/skills/s-fetch-setup ~/.claude/skills/
 rm -rf /tmp/scrapling-fetch-mcp
 ```
 
-Then ask Claude to run `/s-fetch-setup` — it will install the tool and browser binaries (large download), then remove itself. After that, just ask naturally:
+The first time you invoke `/s-fetch`, Claude will read
+`skills/s-fetch/references/install.md` and run the one-time setup
+(installs the tool and downloads browser binaries). After that, just
+ask naturally:
 
 ```
 "Fetch the docs at https://example.com/api"
@@ -41,7 +42,7 @@ Then ask Claude to run `/s-fetch-setup` — it will install the tool and browser
 
 ## Claude Desktop (MCP Server)
 
-If you've already run `/s-fetch-setup`, the tool is installed — skip to the config below.
+If the `/s-fetch` skill has already installed the tool, skip to the config below.
 
 Otherwise install first:
 
