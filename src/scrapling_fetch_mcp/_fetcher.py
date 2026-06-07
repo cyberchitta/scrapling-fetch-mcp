@@ -3,11 +3,21 @@ from json import dumps
 from re import compile
 from re import error as re_error
 from typing import Optional
+from urllib.parse import urlparse
 
 from bs4 import BeautifulSoup
 
 from scrapling_fetch_mcp._markdownify import _CustomMarkdownify
 from scrapling_fetch_mcp._scrapling import browse_url
+
+
+def _require_web_url(url: str) -> str:
+    scheme = urlparse(url).scheme.lower()
+    if scheme not in ("http", "https"):
+        raise ValueError(
+            f"unsupported URL scheme '{scheme}': only http/https are allowed"
+        )
+    return url
 
 
 def _html_to_markdown(html: str) -> str:
@@ -75,7 +85,7 @@ def _create_metadata(
 async def fetch_page_impl(
     url: str, mode: str, format: str, max_length: int, start_index: int
 ) -> str:
-    page = await browse_url(url, mode)
+    page = await browse_url(_require_web_url(url), mode)
     is_markdown = format == "markdown"
     full_content = (
         _html_to_markdown(page.html_content) if is_markdown else page.html_content
@@ -99,7 +109,7 @@ async def fetch_pattern_impl(
     max_length: int,
     context_chars: int,
 ) -> str:
-    page = await browse_url(url, mode)
+    page = await browse_url(_require_web_url(url), mode)
     is_markdown = format == "markdown"
     full_content = (
         _html_to_markdown(page.html_content) if is_markdown else page.html_content

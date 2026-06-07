@@ -22,7 +22,7 @@ async def s_fetch_page(
     """Fetches a complete web page with pagination support. Retrieves content from websites with bot-detection avoidance. For best performance, start with 'basic' mode (fastest), then only escalate to 'stealth' or 'max-stealth' modes if basic mode fails. Content is returned as 'METADATA: {json}\\n\\n[content]' where metadata includes length information and truncation status.
 
     Args:
-        url: URL to fetch
+        url: Web URL to fetch (http/https only)
         mode: Fetching mode (basic, stealth, or max-stealth)
         format: Output format (html or markdown)
         max_length: Maximum number of characters to return.
@@ -50,7 +50,7 @@ async def s_fetch_pattern(
     """Extracts content matching regex patterns from web pages. Retrieves specific content from websites with bot-detection avoidance. For best performance, start with 'basic' mode (fastest), then only escalate to 'stealth' or 'max-stealth' modes if basic mode fails. Returns matched content as 'METADATA: {json}\\n\\n[content]' where metadata includes match statistics and truncation information. Each matched content chunk is delimited with '॥๛॥' and prefixed with '[Position: start-end]' indicating its byte position in the original document, allowing targeted follow-up requests with s-fetch-page using specific start_index values.
 
     Args:
-        url: URL to fetch
+        url: Web URL to fetch (http/https only)
         search_pattern: Regular expression pattern to search for in the content
         mode: Fetching mode (basic, stealth, or max-stealth)
         format: Output format (html or markdown)
