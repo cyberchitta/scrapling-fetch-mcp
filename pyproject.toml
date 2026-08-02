@@ -1,6 +1,6 @@
 [project]
 name = "scrapling-fetch-mcp"
-version = "0.2.4"
+version = "0.2.5"
 description = "Helps AI assistants access text content from bot-protected websites. MCP server that fetches HTML/markdown from sites with anti-automation measures using Scrapling."
 readme = "README.md"
 authors = [
@@ -16,8 +16,12 @@ dependencies = [
     "beautifulsoup4>=4.14.2",
     "lxml>=6.0.2",
     "markdownify>=1.2.0",
-    "mcp>=1.28.1",
+    "mcp>=2.0.0",
     "scrapling[fetchers]>=0.4.7",
+    # 0.14.0 dropped Chrome fingerprint data above 143 while scrapling pins
+    # 149, which fails at import time. Excluded rather than pinned so a fixed
+    # release is picked up automatically.
+    "apify-fingerprint-datapoints!=0.14.0",
     # Indirect dependencies (security constraints)
     "cryptography>=48.0.1",
     "idna>=3.15",

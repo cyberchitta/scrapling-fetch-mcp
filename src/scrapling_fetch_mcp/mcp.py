@@ -1,14 +1,14 @@
 from logging import getLogger
 from traceback import format_exc
 
-from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
 
 from scrapling_fetch_mcp._fetcher import (
     fetch_page_impl,
     fetch_pattern_impl,
 )
 
-mcp = FastMCP("scrapling-fetch-mcp")
+mcp = MCPServer("scrapling-fetch-mcp")
 
 
 @mcp.tool()
