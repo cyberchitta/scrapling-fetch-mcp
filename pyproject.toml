@@ -23,8 +23,9 @@ dependencies = [
     # release is picked up automatically.
     "apify-fingerprint-datapoints!=0.14.0",
     # Indirect dependencies (security constraints)
-    "cryptography>=48.0.1",
+    "cryptography>=50.0.0",
     "idna>=3.15",
+    "protego>=0.6.2",
     "pydantic-settings>=2.14.2",
     "PyJWT>=2.13.0",
     "python-multipart>=0.0.31",
