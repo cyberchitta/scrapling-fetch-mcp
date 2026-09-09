@@ -41,3 +41,6 @@ Thumbs.db
 .commit-msg
 
 .DS_Store
+
+# Working notes (symlink into the private working-notes repo)
+_notes
