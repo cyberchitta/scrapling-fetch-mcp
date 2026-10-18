@@ -23,13 +23,14 @@ dependencies = [
     # release is picked up automatically.
     "apify-fingerprint-datapoints!=0.14.0",
     # Indirect dependencies (security constraints)
+    "anyio>=4.14.2",
     "cryptography>=50.0.0",
     "idna>=3.15",
     "protego>=0.6.2",
     "pydantic-settings>=2.14.2",
-    "PyJWT>=2.13.0",
+    "PyJWT>=2.15.0",
     "python-multipart>=0.0.31",
-    "soupsieve>=2.8.4",
+    "soupsieve>=2.9.0",
     "starlette>=1.3.1",
 ]
 
