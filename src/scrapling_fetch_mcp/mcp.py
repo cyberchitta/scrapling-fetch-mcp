@@ -2,6 +2,7 @@ from logging import getLogger
 from traceback import format_exc
 
 from mcp.server.mcpserver import MCPServer
+from mcp.server.mcpserver.exceptions import ToolError
 
 from scrapling_fetch_mcp._fetcher import (
     fetch_page_impl,
@@ -9,6 +10,15 @@ from scrapling_fetch_mcp._fetcher import (
 )
 
 mcp = MCPServer("scrapling-fetch-mcp")
+
+
+def _tool_error(tool: str, e: Exception) -> ToolError:
+    # mcp 2.x hides the text of any non-ToolError exception from the model, which
+    # then cannot tell a bad argument from a blocked fetch worth retrying in stealth.
+    logger = getLogger("scrapling_fetch_mcp")
+    logger.error("DETAILED ERROR IN %s: %s", tool, str(e))
+    logger.error("TRACEBACK: %s", format_exc())
+    return ToolError(f"{type(e).__name__}: {e}")
 
 
 @mcp.tool()
@@ -32,10 +42,7 @@ async def s_fetch_page(
         result = await fetch_page_impl(url, mode, format, max_length, start_index)
         return result
     except Exception as e:
-        logger = getLogger("scrapling_fetch_mcp")
-        logger.error("DETAILED ERROR IN s_fetch_page: %s", str(e))
-        logger.error("TRACEBACK: %s", format_exc())
-        raise
+        raise _tool_error("s_fetch_page", e) from e
 
 
 @mcp.tool()
@@ -63,10 +70,7 @@ async def s_fetch_pattern(
         )
         return result
     except Exception as e:
-        logger = getLogger("scrapling_fetch_mcp")
-        logger.error("DETAILED ERROR IN s_fetch_pattern: %s", str(e))
-        logger.error("TRACEBACK: %s", format_exc())
-        raise
+        raise _tool_error("s_fetch_pattern", e) from e
 
 
 def run_server():

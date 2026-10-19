@@ -1,6 +1,6 @@
 from functools import reduce
 from json import dumps
-from re import compile
+from re import Pattern, compile
 from re import error as re_error
 from typing import Optional
 from urllib.parse import urlparse
@@ -20,6 +20,13 @@ def _require_web_url(url: str) -> str:
     return url
 
 
+def _compile_pattern(pattern: str) -> Pattern[str]:
+    try:
+        return compile(pattern)
+    except re_error as e:
+        raise ValueError(f"invalid regex pattern: {e}") from e
+
+
 def _html_to_markdown(html: str) -> str:
     soup = BeautifulSoup(html, "lxml")
     for script in soup(["script", "style"]):
@@ -29,35 +36,32 @@ def _html_to_markdown(html: str) -> str:
 
 
 def _search_content(
-    content: str, pattern: str, context_chars: int = 200
+    content: str, pattern: Pattern[str], context_chars: int = 200
 ) -> tuple[str, int]:
-    try:
-        matches = list(compile(pattern).finditer(content))
-        if not matches:
-            return "", 0
-        chunks = [
-            (
-                max(0, match.start() - context_chars),
-                min(len(content), match.end() + context_chars),
-            )
-            for match in matches
-        ]
-        merged_chunks = reduce(
-            lambda acc, chunk: (
-                [*acc[:-1], (acc[-1][0], max(acc[-1][1], chunk[1]))]
-                if acc and chunk[0] <= acc[-1][1]
-                else [*acc, chunk]
-            ),
-            chunks,
-            [],
+    matches = list(pattern.finditer(content))
+    if not matches:
+        return "", 0
+    chunks = [
+        (
+            max(0, match.start() - context_chars),
+            min(len(content), match.end() + context_chars),
         )
-        result_sections = [
-            f"॥๛॥\n[Position: {start}-{end}]\n{content[start:end]}"
-            for start, end in merged_chunks
-        ]
-        return "\n".join(result_sections), len(matches)
-    except re_error as e:
-        return f"ERROR: Invalid regex pattern: {str(e)}", 0
+        for match in matches
+    ]
+    merged_chunks = reduce(
+        lambda acc, chunk: (
+            [*acc[:-1], (acc[-1][0], max(acc[-1][1], chunk[1]))]
+            if acc and chunk[0] <= acc[-1][1]
+            else [*acc, chunk]
+        ),
+        chunks,
+        [],
+    )
+    result_sections = [
+        f"॥๛॥\n[Position: {start}-{end}]\n{content[start:end]}"
+        for start, end in merged_chunks
+    ]
+    return "\n".join(result_sections), len(matches)
 
 
 def _create_metadata(
@@ -109,6 +113,7 @@ async def fetch_pattern_impl(
     max_length: int,
     context_chars: int,
 ) -> str:
+    pattern = _compile_pattern(search_pattern)
     page = await browse_url(_require_web_url(url), mode)
     is_markdown = format == "markdown"
     full_content = (
@@ -117,7 +122,7 @@ async def fetch_pattern_impl(
 
     original_length = len(full_content)
     matched_content, match_count = _search_content(
-        full_content, search_pattern, context_chars
+        full_content, pattern, context_chars
     )
 
     if not matched_content:
