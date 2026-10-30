@@ -53,6 +53,8 @@ uvx --from git+https://github.com/cyberchitta/scrapling-fetch-mcp scrapling inst
 
 > **Note**: Browser installation downloads hundreds of MB and must complete before first use. If the server times out initially, wait a few minutes and try again.
 
+> **Upgrading**: after `uv tool upgrade scrapling-fetch-mcp`, re-run the `scrapling install` line above. A new Scrapling release can need newer browser binaries, and until they are installed the `stealth` and `max-stealth` modes fail with `Executable doesn't exist`.
+
 Add this to your Claude Desktop MCP settings and restart:
 
 **MacOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`  

@@ -30,7 +30,12 @@ To upgrade the tool to the latest commit on `main`:
 
 ```bash
 uv tool upgrade scrapling-fetch-mcp
+"$(uv tool dir)/scrapling-fetch-mcp/bin/scrapling" install
 ```
+
+The second line matters: a new Scrapling release can need newer browser
+binaries, and without them `stealth` and `max-stealth` fail with
+`Executable doesn't exist`.
 
 The skill files (`SKILL.md`, `references/`) don't auto-update — re-run
 the `cp -r` from the README's install section to refresh them.

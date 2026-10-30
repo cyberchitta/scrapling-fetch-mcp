@@ -14,7 +14,9 @@ Fetches a URL directly via scrapling, bypassing bot detection.
 
 If the bash command below fails because `scrapling-fetch-mcp` isn't
 installed (e.g. `No such file or directory` for the `bin/python3`
-path), follow `references/install.md` once before proceeding.
+path), follow `references/install.md` once before proceeding. If it
+fails with `Executable doesn't exist` (browser binaries out of date
+after an upgrade), run only step 2 of that file.
 
 ## Arguments
 
