@@ -26,6 +26,12 @@ uv build
 
 No test suite exists in this project.
 
+## Working notes
+
+`_notes/` (working-notes symlink) may be edited. Intent is `_notes/intent.md`;
+current state is `_notes/worklist.md`; field notes go to
+`_notes/field-notes.md`.
+
 ## Skill structure
 
 ```
