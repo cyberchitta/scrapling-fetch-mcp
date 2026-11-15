@@ -7,7 +7,7 @@ authors = [
     { name = "restlessronin", email = "88921269+restlessronin@users.noreply.github.com" },
 ]
 license = { file = "LICENSE" }
-requires-python = ">=3.10"
+requires-python = ">=3.15,<3.16"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
